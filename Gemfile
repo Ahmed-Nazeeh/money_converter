@@ -75,3 +75,11 @@ end
 
 
 gem "devise", github: "heartcombo/devise", ref: "f8d1ea90bc3"
+
+gem "money", "~> 6.16"
+
+gem "money-rails", "~> 1.15"
+
+gem "eu_central_bank", "~> 1.7"
+
+# gem "factory_girl", "~> 4.9"

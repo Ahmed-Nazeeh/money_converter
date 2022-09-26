@@ -3,7 +3,7 @@ Given('Iam on the homepage') do
 end
 
 When('I click on the rigestration link') do
-click_on "registration-link"
+    click_on "registration-link"
 end
 
 When('I fill in and submit the registration form') do
@@ -19,5 +19,5 @@ Then('should see a registration confirmation message') do
 end
 
 Then('I should receive a confirmation email') do
-    step %{"ahmed@example.com" should receive an email}
+    steps %{"ahmed@example.com" should receive an email}
 end
