@@ -1,10 +1,3 @@
-# Given('registered user with the email with password exists') do 
-#     @user = Factory(:registered_user, :email => "ahmed@example.com", :password => "123456", :password_confirmation => "123456")
-# end
-
-# Given('registered user with the email with password exists') do 
-# @user = Factory(:registered_user, :email => "ahmed@example.com", :password => "123456", :password_confirmation => "123456")
-# end
 
 Given('Iam on the home page') do
     visit "/"
@@ -37,11 +30,20 @@ end
 
 Then('I should see confirmation message signed in successfully') do
     expect(page).to have_content("successfully")
-    # expect(current_url).to eq(root_path)
 end
   
 And('I should see the converter form') do
     expect(page).to have_link("destroy_session_link")
-    # expect(response).to be_redirect
-    # expect(current_url).to eq(root_path)
+    expect(page).to have_content("Enter value")
+end
+
+When('I fill in and submit the converter form') do
+    fill_in "enter_value", with: 1000
+    select "usd" , from: "convert_from"
+    select "usd", from: "convert_to"
+    click_on "submit"
+end
+  
+Then('I should see the results in the result fields') do
+   expect(page.results).to have_include(1000)
 end

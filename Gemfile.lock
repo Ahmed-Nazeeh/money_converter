@@ -342,6 +342,7 @@ DEPENDENCIES
   jbuilder
   money (~> 6.16)
   money-rails (~> 1.15)
+  pry (~> 0.14.1)
   pry-byebug
   pry-doc
   pry-rails
