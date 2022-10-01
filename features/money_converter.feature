@@ -12,7 +12,7 @@ Feature: Convert money
         Then I should see confirmation message signed in successfully
         And I should see the converter form
         When I fill in and submit the converter form 
-        Then I should see the results in the result fields
+
 
 
 

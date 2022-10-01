@@ -1,0 +1,17 @@
+<div id="result"><h1><%= @result %></h1></div>
+<div>
+    <%= form_with url: exchange_path, local: true, method: :post do |form| %>
+        <ul style="list-style-type:none">
+            <li><%= form.label :enter_value %>
+            <%= form.number_field :enter_value %></li>
+        
+            <li><%= form.label :convert_from %> 
+            <%= form.select :convert_from, @currencies_major, prompt: 'Choose currency...' %></li>
+            <li><%= form.label :convert_to %> 
+            <%= form.select :convert_to, @currencies_major, prompt: 'Choose currency...' %></li>
+            
+                <%= form.submit :submit %>
+        
+        </ul>
+    <% end %>
+</div>

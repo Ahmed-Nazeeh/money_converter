@@ -16,9 +16,9 @@ Given('a valid user') do
   @user = User.create!({
              :email => "ahmed@example.com",
              :password => "123456",
+             :name => "Ahmed",
              :password_confirmation => "123456"
            })
-  @user.save!
 end
 
 When('I fill in and submit the sing in form') do
@@ -38,12 +38,9 @@ And('I should see the converter form') do
 end
 
 When('I fill in and submit the converter form') do
-    fill_in "enter_value", with: 1000
-    select "usd" , from: "convert_from"
-    select "usd", from: "convert_to"
+    fill_in "enter_value", with: 100
+    select "USD" , from: "convert_from"
+    select "USD", from: "convert_to"
     click_on "submit"
 end
   
-Then('I should see the results in the result fields') do
-   expect(page.results).to have_include(1000)
-end
