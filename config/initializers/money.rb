@@ -9,11 +9,7 @@ MoneyRails.configure do |config|
   # Set default bank object
   #
   # Example:
-  # config.default_bank = EuCentralBank.new
-  # Money.default_bank = Money::Bank::VariableExchange.new(Money::RatesStore::Memory.new)
-  # Add exchange rates to current money bank object.
-  # (The conversion rate refers to one direction only)
-  #
+
   # Example:
   # config.add_rate "USD", "CAD", 1.24515
   # config.add_rate "CAD", "USD", 0.803115
@@ -85,11 +81,11 @@ MoneyRails.configure do |config|
 
   # If you would like to use I18n localization (formatting depends on the
   # locale):
-  # config.locale_backend = :i18n
+  config.locale_backend = :i18n
   #
   # Example (using default localization from rails-i18n):
   #
-  # I18n.locale = :en
+  I18n.locale = :en
   # Money.new(10_000_00, 'USD').format # => $10,000.00
   # I18n.locale = :es
   # Money.new(10_000_00, 'USD').format # => $10.000,00

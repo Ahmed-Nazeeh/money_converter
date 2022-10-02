@@ -1,4 +1,4 @@
-<div id="result"><h1><%= @result %></h1></div>
+<div id="result"><h1><%=  "#{@result}" + "#{params[:convert_to] if params[:convert_to].present?}" %></h1></div>
 <div>
     <%= form_with url: exchange_path, local: true, method: :post do |form| %>
         <ul style="list-style-type:none">
@@ -6,9 +6,9 @@
             <%= form.number_field :enter_value %></li>
         
             <li><%= form.label :convert_from %> 
-            <%= form.select :convert_from, @currencies_major, prompt: 'Choose currency...' %></li>
+            <%= form.select :convert_from, @bnk_vld_crr, prompt: 'Choose currency...' %></li>
             <li><%= form.label :convert_to %> 
-            <%= form.select :convert_to, @currencies_major, prompt: 'Choose currency...' %></li>
+            <%= form.select :convert_to, @bnk_vld_crr, prompt: 'Choose currency...' %></li>
             
                 <%= form.submit :submit %>
         
