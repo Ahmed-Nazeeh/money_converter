@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
         if !@eu_bank.rates_updated_at || @eu_bank.rates_updated_at < Time.now - 1.days
             @eu_bank.save_rates(cache)
             @eu_bank.update_rates(cache)
-            flash[:notice] = "Money has been saved to cache"
         end
     # require "pry" ; binding.pry
     end   
