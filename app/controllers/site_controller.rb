@@ -1,37 +1,31 @@
 class SiteController < ApplicationController
+    before_action :set_conversion_rates
+    
     def index 
         # @currencies_all = all_currencies(Money::Currency.table)
-        @currencies_major = major_currencies(Money::Currency.table)
-        @bnk_vld_crr = xml_to_hash
-        # require 'pry' ; binding.pry
-        @result = 0.0
-
-        
+        # @currencies_major = major_currencies(Money::Currency.table)
+        xml_to_hash
     end
 
     def exchange
-        # @eu_bank = EuCentralBank.new
-        # Money.default_bank = @eu_bank
-        # # # call this before calculating exchange rates
-        # # # this will download the rates from ECB
-        # @eu_bank.update_rates
-        # Money.infinite_precision = true
-        # @result = @eu_bank.exchange_with(Money.new(params[:enter_value], params[:convert_from]), params[:convert_to])
-        @result = @eu_bank.exchange_with(Money.from_amount(params[:enter_value].to_i, params[:convert_from]), params[:convert_to])
-        # require "pry" ; binding.pry
-        
-        # @result = Money.from_cents(params[:enter_value], params[:convert_from]).exchange_to(params[:convert_to])
-        respond_to do |format| 
-            format.html {}
-            format.turbo_stream { render 'site/result', locals: {result: @result} }
-        end
+            unless params[:enter_value].empty? || params[:convert_to].empty? || params[:convert_from].empty?
+                @result = @eu_bank.exchange_with(Money.from_amount(params[:enter_value].to_i, params[:convert_from]), params[:convert_to])
+                respond_to do |format| 
+                    format.html {}
+                    format.turbo_stream { render 'site/result', locals: {result: @result} }     
+                end
+            else
+                xml_to_hash
+                flash.now[:alert] = "Something went wrong. Please fill and try again."
+                render 'site/index', status: :unprocessable_entity
+            end
+
     end
 
+    private
+    
 # Returns an array of currency id where
 # priority < 10
-
-    private
-
     def major_currencies(hash)
         hash.inject([]) do |array, (id, attributes)|
         priority = attributes[:priority]
@@ -42,6 +36,7 @@ class SiteController < ApplicationController
         array
         end.compact.flatten
     end
+
 # Returns an array of all currency id
     def all_currencies(hash)
         # hash.map {|keys, values| "#{values[:name]} (#{keys})"}
@@ -58,6 +53,30 @@ class SiteController < ApplicationController
                 res << ["EUR", "1"]
         end
         hashed_res = res.to_h
-        hashed_res.keys
+        @bnk_vld_crr = hashed_res.keys
     end
+
+
+    def set_conversion_rates
+        begin
+            cache = "/tmp/exchange_rates.xml"
+            @eu_bank = EuCentralBank.new
+            Money.default_bank = @eu_bank
+
+        if !@eu_bank.rates_updated_at || @eu_bank.rates_updated_at < Time.now - 1.days
+            @eu_bank.save_rates(cache)
+            @eu_bank.update_rates(cache)
+        end
+        rescue => exception
+            flash.now[:alert] = exception
+            render "welcome/index"
+        end
+    end 
+    
+    # gem install "net-ping"
+    # require "net/ping"
+    # def internet_connection?
+    #   Net::Ping::External.new("8.8.8.8").ping?
+    # end
+
 end

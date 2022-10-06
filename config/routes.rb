@@ -3,5 +3,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   post "exchange", to: "site#exchange", as: "exchange"
-  root "site#index"
+  get "site#index", to: "site#index", as: "site_index"
+  root "welcome#index"
 end

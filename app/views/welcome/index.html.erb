@@ -1,0 +1,6 @@
+<h1>Welcome To Home page</h1>
+<h3 style="color:blue;">
+    <% if user_signed_in? %>
+        Hi <%= current_user.name %>
+    <% end %>
+</h3>
