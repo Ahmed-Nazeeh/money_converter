@@ -1,4 +1,5 @@
 class SiteController < ApplicationController
+    before_action :set_user
     before_action :set_conversion_rates
     
     def index 
@@ -78,5 +79,16 @@ class SiteController < ApplicationController
     # def internet_connection?
     #   Net::Ping::External.new("8.8.8.8").ping?
     # end
-
+    def set_user 
+        unless signed_in?
+            redirect_to root_path, alert: "You must login first." 
+        end
+    end
 end
+
+
+
+    
+
+
+    

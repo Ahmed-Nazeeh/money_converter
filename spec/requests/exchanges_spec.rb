@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "Exchange", type: :request do
   describe "post /exchange" do
+    before do 
+      params = { email: "ahmed@example.com", password: "123456", name: "Ahmed" }
+      post user_registration_path,  params:{ user: params }
+      params = { email: "ahmed@example.com", password: "123456" }
+      post user_session_path, params: params
+    end
+    
     it "should pass with existing params" do
       params = { enter_value: 1000, convert_from: "USD", convert_to: "USD" }
       post exchange_path(format: :turbo_stream), params: params
