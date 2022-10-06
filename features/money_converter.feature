@@ -11,7 +11,9 @@ Feature: Convert money
         And I fill in and submit the sing in form 
         Then I should see confirmation message signed in successfully
         And I should see the converter form
-        When I fill in and submit the converter form 
+        When I click on Exchange button
+        Then I should see the exchange form
+        And I fill in and submit the converter form 
 
 
 
