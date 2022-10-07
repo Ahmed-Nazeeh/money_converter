@@ -86,3 +86,7 @@ gem "eu_central_bank", "~> 1.7"
 # gem "factory_girl", "~> 4.9"
 
 gem "pry", "~> 0.14.1"
+
+gem "cssbundling-rails", "~> 1.1"
+
+gem "jsbundling-rails", "~> 1.0"
