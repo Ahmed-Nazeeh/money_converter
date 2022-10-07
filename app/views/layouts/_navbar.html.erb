@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <div class="col-0"><a><%= link_to "Navbar", root_path, class: "navbar-brand" %></a></div>
+    <div class="row">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                  <% unless user_signed_in? %>
+                      <%= link_to "Sign In", new_user_session_path, id: "sign_in_link", class: "btn btn-success" %>
+                      <%= link_to "Register", new_user_registration_path, id: "registration-link", class: "btn btn-primary" %>
+                  <% else %>
+                      <%= link_to "Exchange", site_index_path, class: "navbar-brand" %>
+                      <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, id: "destroy_session_link", class: "btn btn-danger" %>          
+                  <% end %>
+            </li>
+          </ul>
+    </div>
+  </div>
+</nav>

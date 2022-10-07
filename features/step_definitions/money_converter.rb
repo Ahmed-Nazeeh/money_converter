@@ -1,4 +1,3 @@
-
 Given('Iam on the home page') do
     visit "/"
 end
@@ -34,13 +33,23 @@ end
   
 And('I should see the converter form') do
     expect(page).to have_link("destroy_session_link")
-    expect(page).to have_content("Enter value")
+    expect(page).to have_content("Signed in successfully.")
+    expect(page).to have_link("Exchange")
 end
 
-When('I fill in and submit the converter form') do
+When('I click on Exchange button') do 
+    click_on("Exchange")
+end
+
+Then('I should see the exchange form') do 
+    expect(page).to have_content('Enter value')
+end
+
+And('I fill in and submit the converter form') do
     fill_in "enter_value", with: 100
     select "USD" , from: "convert_from"
     select "USD", from: "convert_to"
     click_on "submit"
 end
   
+#Then Test turbo results with rspec in the requests section

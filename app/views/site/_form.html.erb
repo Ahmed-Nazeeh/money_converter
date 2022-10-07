@@ -1,17 +1,31 @@
-<div id="result"><h1><%=  "#{@result}" + "#{params[:convert_to] if params[:convert_to].present?}" %></h1></div>
-<div>
-    <%= form_with url: exchange_path, local: true, method: :post do |form| %>
-        <ul style="list-style-type:none">
-            <li><%= form.label :enter_value %>
-            <%= form.number_field :enter_value %></li>
-        
-            <li><%= form.label :convert_from %> 
-            <%= form.select :convert_from, @bnk_vld_crr, prompt: 'Choose currency...' %></li>
-            <li><%= form.label :convert_to %> 
-            <%= form.select :convert_to, @bnk_vld_crr, prompt: 'Choose currency...' %></li>
-            
-                <%= form.submit :submit %>
-        
-        </ul>
-    <% end %>
+<div class="col d-flex justify-content-center mt-5">
+  <div class="card w-75"  style="border: 2px solid black">
+    <div class="card-body">
+      <h5 class="card-title text-center" id="result" >
+        <% if @result %> 
+        <%= "#{@result}" + "#{params[:convert_to] if params[:convert_to].present?}" %>
+        <% else %>
+          <small style="color:grey;">Exchanged Results</small>
+        <% end %>
+      </h5>
+    </div>
+  </div>
 </div>
+
+<%= form_with url: exchange_path, local: true, method: :post do |form| %>      
+
+    <div class="form-group">
+      <%= form.label :enter_value %>
+      <%= form.number_field :enter_value, step: :any, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :convert_from %> 
+      <%= form.select :convert_from, @bnk_vld_crr,{ prompt: 'Choose currency...'}, {class: "form-select"} %>
+    </div>
+    <div class="form-group">
+      <%= form.label :convert_to %> 
+      <%= form.select :convert_to, @bnk_vld_crr,{prompt: 'Choose currency...'}, {class: "form-select"}  %>
+    </div>
+    <%= form.submit :submit, class: "btn btn-primary mt-3" %>
+<% end %>
