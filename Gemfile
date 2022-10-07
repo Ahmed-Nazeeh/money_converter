@@ -73,7 +73,9 @@ group :development do
   # gem "spring"
 end
 
-
+group :production do 
+ gem 'pg'
+end
 gem "devise", github: "heartcombo/devise", ref: "f8d1ea90bc3"
 
 gem "money", "~> 6.16"
