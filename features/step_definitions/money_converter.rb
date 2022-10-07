@@ -1,4 +1,3 @@
-
 Given('Iam on the home page') do
     visit "/"
 end

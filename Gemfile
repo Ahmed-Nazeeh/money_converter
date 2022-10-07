@@ -86,4 +86,6 @@ gem "eu_central_bank", "~> 1.7"
 
 gem "pry", "~> 0.14.1"
 
-gem "bootstrap", "~> 5.0"
+gem 'bootstrap', '~> 5.2.1'
+
+#gem 'jquery-rails'

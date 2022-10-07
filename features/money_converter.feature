@@ -14,8 +14,3 @@ Feature: Convert money
         When I click on Exchange button
         Then I should see the exchange form
         And I fill in and submit the converter form 
-
-
-
-
-     
