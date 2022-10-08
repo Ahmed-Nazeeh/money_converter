@@ -89,3 +89,5 @@ gem "eu_central_bank", "~> 1.7"
 # gem "factory_girl", "~> 4.9"
 
 gem "pry", "~> 0.14.1"
+
+#gem "net-ping"

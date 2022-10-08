@@ -1,6 +1,6 @@
 class SiteController < ApplicationController
     before_action :set_user
-    before_action :set_conversion_rates, only: [:exchange]
+    before_action :set_conversion_rates
         
     def index 
         # @currencies_all = all_currencies(Money::Currency.table)
@@ -47,7 +47,7 @@ class SiteController < ApplicationController
 
     def set_conversion_rates
         begin
-            cache = File.new("/tmp/exchange_rates.xml", "w")  
+            cache = File.new('./tmp/cache/exchange_rates.xml', "w") 
             @eu_bank = EuCentralBank.new
             Money.default_bank = @eu_bank
 
@@ -61,15 +61,10 @@ class SiteController < ApplicationController
             render "welcome/index"
         end
     end 
-    
-    # gem install "net-ping"
-    # require "net/ping"
-    # def internet_connection?
-    #   Net::Ping::External.new("8.8.8.8").ping?
-    # end
 
     def xml_to_hash
-        data = File.open("/tmp/exchange_rates.xml")
+        #require 'pry' ; binding.pry
+        data = File.open("./tmp/cache/exchange_rates.xml")
         hash = Hash.from_xml(data)
         filtered_hash = hash.dig("Envelope","Cube","Cube","Cube")
         res = []
