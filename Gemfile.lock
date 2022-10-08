@@ -217,6 +217,7 @@ GEM
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.4.3)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -351,6 +352,7 @@ DEPENDENCIES
   jbuilder
   money (~> 6.16)
   money-rails (~> 1.15)
+  pg
   pry (~> 0.14.1)
   pry-byebug
   pry-doc
