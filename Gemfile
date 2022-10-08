@@ -91,3 +91,5 @@ gem "eu_central_bank", "~> 1.7"
 gem "pry", "~> 0.14.1"
 
 #gem "net-ping"
+
+gem "rexml", "~> 3.2"
