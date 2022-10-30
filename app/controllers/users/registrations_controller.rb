@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    # require "pry"; binding.pry
+    #require "pry"; binding.pry
     super
   end
 
